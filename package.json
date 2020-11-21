@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prestart": "sucrase ./src -d ./dist --transforms imports",
-    "start": "node ./dist/app/app.js",
+    "prestart": "sucrase ./src -d ./dist --transforms imports; npx sequelize db:migrate",
+    "start": "NODE_ENV=production node ./dist/app/app.js",
     "dev": "nodemon --exec sucrase-node ./app/app.js",
     "dev:debug": "nodemon --inspect ./src/app/app.js"
   },
