@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createUserController = void 0;
+const typeorm_1 = require("typeorm");
+const CreateUserUseCase_1 = require("@/domain/useCases/createUser/CreateUserUseCase");
+const BcryptHashPassword_1 = require("@/providers/HashPassword/implementations/BcryptHashPassword");
+const CreateUserController_1 = require("@/presentation/createUser/CreateUserController");
+const TypeOrmUserRepository_1 = require("@/persistence/user/repositories/implementations/TypeOrmUserRepository");
+const typeOrmUserRepository = typeorm_1.getCustomRepository(TypeOrmUserRepository_1.TypeOrmUserRepository);
+const bcryptHashPassword = new BcryptHashPassword_1.BcryptHashPassword();
+const createUserUseCase = new CreateUserUseCase_1.CreateUserUseCase(typeOrmUserRepository, bcryptHashPassword);
+const createUserController = new CreateUserController_1.CreateUserController(createUserUseCase);
+exports.createUserController = createUserController;
